@@ -43,7 +43,7 @@ class PlayerInteraction {
 
     static postMessageWithTimeout(channel, formatMessage, scheduler, timeout) {
         let timeoutMessage = channel.send(formatMessage(timeout));
-        let timeExpired = rx.Observable.timer(0, 1000, scheduler)
+        let timeExpired = rx.Observable.timer(0, 10000, scheduler)
             .take(timeout + 1)
             .do((x) => timeoutMessage.updateMessage(formatMessage(`${timeout - x}`)))
             .publishLast();
